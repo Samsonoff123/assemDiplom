@@ -1,0 +1,10 @@
+import React from 'react'
+import img from '../../assets/icons/empty-folder.png'
+
+export default function index() {
+  return (
+    <div className='empty'>Деректер жоқ
+        <img src={img} />
+    </div>
+  )
+}
