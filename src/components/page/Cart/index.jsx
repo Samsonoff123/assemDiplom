@@ -30,9 +30,6 @@ export default function Cart({isAdmin}) {
                 : <Loader />
               }
             </div>
-            {
-              !!cart.length && <Button style={{width: '100%', marginTop: 20}}>CHECKOUT</Button>
-            }
         </div>
     </div>
   )
