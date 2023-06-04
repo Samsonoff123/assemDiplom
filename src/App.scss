@@ -67,6 +67,12 @@ h4 {
     svg {
         cursor: pointer;
     }
+
+    img {
+        height: 130px;
+        margin-top: -30px;
+        object-fit: contain;
+    }
 }
 
 .main, .profile {
@@ -74,8 +80,62 @@ h4 {
 }
 
 .main {
+    padding-top: 90px;
     height: calc(100vh - 84px);
     overflow-y: scroll;
+}
+
+.MuiPaper-root {
+    button {
+        min-width: auto;
+    }
+    .MuiDialogTitle-root {
+        background-color: #349E5B;
+        color: white
+    }
+}
+
+.products__head {
+    padding: 20px 5px;
+    padding-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 0 0 30px 30px;
+
+    h3 {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 0;
+        text-transform: uppercase;
+        text-align: left;
+    }
+
+    span {
+        display: block;
+        font-size: 16px;
+        margin: 10px 0;
+        max-width: 250px;
+        text-align: left;
+    }
+
+    .products__head_group {
+        display: flex;
+        align-items: center;
+
+        img {
+            max-width: 40%;
+            object-fit: contain;
+        }
+    }
+
+    .products__head_buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+
+        button {
+            min-width: auto;
+        }
+    }
 }
 
 .products__main {
@@ -91,6 +151,96 @@ h4 {
     .course-name {
         text-transform: uppercase;
     }
+
+    .detail__test {
+        margin-top: 20px;
+        background-color: #349E5B;
+        padding: 20px;
+        border-radius: 25px;
+    }
+
+    .product__detail_h1 {
+        font-size: 24px;
+        color: white;
+    }
+
+    .result {
+        text-align: center;
+    
+        button {
+          font-weight: bold;
+          font-family: 'Nunito', sans-serif;
+          border-radius: 30px;
+          border: 0;
+          padding: 15px 30px;
+          font-size: 20px;
+          background-color: darken(#ffffff, 3%);
+          color: #349E5B;
+          margin-top: 20px;
+          cursor: pointer;
+        }
+    
+        h2 {
+          margin-bottom: 0;
+          color: white;
+        }
+    
+        img {
+          width: 150px;
+          object-fit: contain;
+        }
+      }
+    
+      .progress {
+        height: 10px;
+        border-radius: 30px;
+        background-color: rgb(232, 232, 232);
+        margin-bottom: 25px;
+    
+        &__inner {
+          height: 100%;
+          border-radius: 30px;
+          width: 80%;
+          background: rgb(18, 231, 48);
+          transition: all 0.3s ease-in-out;
+          background: linear-gradient(90deg, rgba(18, 231, 48, 1) 0%, rgba(0, 212, 255, 1) 100%);
+        }
+      }
+    
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        height: 50px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    
+      h1 {
+        margin: 0;
+      }
+    
+      ul {
+        list-style: none;
+        padding: 0;
+    
+        li {
+          padding: 15px;
+          border: 2px solid rgba(255, 255, 255, 0.1);
+          border-radius: 15px;
+          margin-bottom: 10px;
+          cursor: pointer;
+          transition: all 0.1s ease-in-out;
+          color: white;
+    
+          &:hover {
+            border: 2px solid rgba(0, 0, 0, 0.3);
+          }
+        }
+      }
 }
 
 .like__page {
@@ -141,16 +291,19 @@ h4 {
 }
 
 .product__element {
-    width: calc(50% - 5px);
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: white;
+    background-color: #278047;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-    height: 380px;
+
+    h3 {
+        color: white;
+        margin: 0 auto
+    }
 
     .removeButton {
         position: absolute;
@@ -178,13 +331,16 @@ h4 {
     }
 
     .product__title {
+        color: white;
         display: flex;
         justify-content: space-between;
         gap: 10px;
+        font-weight: 800;
         font-size: 16px;
     }
 
     .product__description {
+        color: white;
         font-size: 14px;
         display: -webkit-box;
         -webkit-line-clamp: 3;

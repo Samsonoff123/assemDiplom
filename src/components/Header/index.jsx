@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { ReactComponent as Menu } from '../../assets/menu.svg'
-import { ReactComponent as Cart } from '../../assets/cart.svg'
-import { ReactComponent as Like } from '../../assets/like.svg'
-import { ReactComponent as Profile } from '../../assets/profile.svg'
 import { ReactComponent as Back } from '../../assets/back.svg'
 import { ReactComponent as Logout } from '../../assets/logout.svg'
+import { ReactComponent as Feedback } from '../../assets/feedback.svg'
+import image from '../../assets/marketology.png'
 import { Link, useNavigate } from 'react-router-dom'
+import Button from '../Button'
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
 
-export default function Header({pageName, back = true, isAdmin}) {
+export default function Header({pageName, logo = '', back = true, isAdmin}) {
     const navigate = useNavigate()
+    const [open, setOpen] = useState(false)
 
     const handleLogout = () => {
         localStorage.removeItem('token')
@@ -25,6 +27,11 @@ export default function Header({pageName, back = true, isAdmin}) {
             <span>
                 {pageName}
             </span>
+            {
+            logo && (
+                <img src={logo} />
+            )
+        }
             <div></div>
         </div>
     }
@@ -33,22 +40,37 @@ export default function Header({pageName, back = true, isAdmin}) {
         <Link to={"/"} className="header__element">
             <Menu />
         </Link>
-        <Link to="/cart" className="header__element">
-            <Cart />
-        </Link>
-        <Link to="/like" className="header__element">
-            <Like />
-        </Link>
-        {
-            !!isAdmin ?
-            <Link to="/profile" className="header__element">
-                <Profile />
-            </Link>
-            : <div className="header__element">
-                <Logout onClick={handleLogout} />
-            </div>
-        }
+        <div className="header__element">
+         <Feedback onClick={() => setOpen(true)} />
+        </div>
+        
+        <div className="header__element">
+            <Logout onClick={handleLogout} />
+        </div>
     </div>
+    <Dialog
+          open={open}
+          onClose={()=>setOpen(false)}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Обратная связь"}
+          </DialogTitle>
+          <DialogContent>
+          <div className="products__head">
+                <div className='products__head_group'>
+                    <h3>Оставьте отзыв!</h3>
+                    <img src={image} />
+                </div>
+                <span>Помогите нам улучшить приложение! Как мы можем это сделать?</span>
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button><a style={{color: '#fff'}} href="tel:+77477084946">Связаться с нами</a></Button>
+            <Button white><a href="mailto:sioma.aslan@gmail.com">Отправить письмо</a></Button>
+          </DialogActions>
+        </Dialog>
     </>
   )
 }

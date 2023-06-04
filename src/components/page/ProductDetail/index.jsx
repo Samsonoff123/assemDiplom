@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { Rating, Skeleton } from "@mui/material";
 import Header from "../../Header";
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import { mainData } from "../../sharedConsts";
 
 const useStyles = makeStyles(() => ({
   courseCard: {
@@ -75,22 +75,44 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function ProductDetail({isAdmin}) {
-  const [course, setCourse] = useState();
-  const { id } = useParams();
-  const classes = useStyles();
 
-  useEffect(() => {
-    axios
-      .get(`https://asem-backend.vercel.app/api/product/${id}`)
-      .then((response) => {
-        setCourse(response.data);
-      });
-  }, []);
+function Result({correct, questions}) {
+  return (
+    <div className="result">
+      <img src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png" />
+      <h2>Вы отгадали {correct} ответа из {questions.length}</h2>
+      <button onClick={()=>document.location.reload()}>Попробовать снова</button>
+    </div>
+  );
+}
+
+function Game({ step, question, onClickVariant, questions }) {
+  const percentage = Math.round((step / questions.length) * 100)
+
+  return (
+    <>
+      <div className="progress">
+        <div style={{ width: `${percentage}%` }} className="progress__inner"></div>
+      </div>
+      <h1 className="product__detail_h1">{question.title}</h1>
+      <ul>
+        {question.variants.map((e, id) => 
+          <li onClick={()=>onClickVariant(id)} key={id}>{e}</li>  
+        )}
+      </ul>
+    </>
+  );
+}
+
+function ProductDetail({ isAdmin }) {
+  const { id } = useParams();
+  const data = mainData.find((e) => e.id === id);
+  const [course, setCourse] = useState(data);
+  const classes = useStyles();
 
   return course ? (
     <>
-      <Header isAdmin={isAdmin} pageName="Тауар картасы" />
+      <Header isAdmin={isAdmin} pageName={'Урок ' + id} />
       <ProductCart {...course} />
     </>
   ) : (
@@ -125,26 +147,16 @@ function ProductDetail({isAdmin}) {
 }
 
 export function ProductCart(props) {
-  const { id, name, price, tag, img, description, views, rating } = props;
+  const { id, name, description, text, video, questions } = props;
+  const [step, setStep] = useState(0)
+  const [correct, setCorrect] = useState(0)
+  const question = questions[step]
 
-  const handleSetRating = (event, value) => {
-    event.preventDefault()
-    if (value) {
-      axios.post(`https://asem-backend.vercel.app/api/product/set-rating/${id}`, {
-          rating: value
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      )
-      .then((res) => {
-       console.log(res);
-      })
-      .catch((e) => {
-        console.log(e);
-      })
+  const onClickVariant = (index) => {
+    setStep(step + 1)
+
+    if (index === question.correct) {
+      setCorrect(correct + 1)
     }
   }
 
@@ -152,35 +164,35 @@ export function ProductCart(props) {
     <div className="cart__page">
       <div className="course-card">
         <div className="course-image">
-          <img src={img} alt={name} />
+          <iframe
+            width="100%"
+            height="260"
+            src={`https://www.youtube.com/embed/${video}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title="Embedded youtube"
+          />
         </div>
         <div className="course-details">
           <h3 className="course-name">{name}</h3>
-          <div className="course-price">{price} KZT</div>
-          <div className="course-tags">
-            {tag?.split(" ")?.map((t, index) => (
-              <span key={index} className="tag">
-                {t}
-              </span>
-            ))}
+          <div className="course-description">{description}</div>
+          <br />
+          <div
+            className="course-description"
+            dangerouslySetInnerHTML={{
+              __html: text.replaceAll("\n", "</br>"),
+            }}
+          >
           </div>
-          <div className="course-description">{description?.text}</div>
-          <div className="course-stats">
-            <div className="course-views">
-              <RemoveRedEyeOutlinedIcon />
-              {views} views
-            </div>
-            <div className="course-rating">
-              Rating:
-              <Rating
-                style={{ marginTop: "auto" }}
-                name="half-rating"
-                precision={0.5}
-                defaultValue={rating}
-                onChange={(event, value) => handleSetRating(event, value)}
-              />
-            </div>
+          <div className="detail__test">
+            {
+              step !== questions.length
+              ? <Game step={step} question={question} questions={questions} onClickVariant={onClickVariant} />
+              : <Result correct={correct} questions={questions} />
+            }
           </div>
+
         </div>
       </div>
     </div>

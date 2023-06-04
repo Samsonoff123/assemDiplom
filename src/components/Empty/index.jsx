@@ -3,7 +3,7 @@ import img from '../../assets/icons/empty-folder.png'
 
 export default function index() {
   return (
-    <div className='empty'>Деректер жоқ
+    <div className='empty'>Нет данных
         <img src={img} />
     </div>
   )

@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function index() {
   return (
-    <div className='loader'>Деректер жүктелуде
+    <div className='loader'>Данные грузятся
         <CircularProgress />
     </div>
   )
