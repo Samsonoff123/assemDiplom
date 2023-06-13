@@ -55,20 +55,21 @@ export default function Header({pageName, logo = '', back = true, isAdmin}) {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            {"Обратная связь"}
+            {"Кері байланыс"}
           </DialogTitle>
           <DialogContent>
           <div className="products__head">
                 <div className='products__head_group'>
-                    <h3>Оставьте отзыв!</h3>
+                    <h3>Пікір қалдырыңыз!</h3>
                     <img src={image} />
                 </div>
-                <span>Помогите нам улучшить приложение! Как мы можем это сделать?</span>
+                <span>Қолданбаны жақсартуға көмектесіңіз!</span>
+                <span>Мұны қалай істей аламыз?</span>
             </div>
           </DialogContent>
           <DialogActions>
-            <Button><a style={{color: '#fff'}} href="tel:+77477084946">Связаться с нами</a></Button>
-            <Button white><a href="mailto:sioma.aslan@gmail.com">Отправить письмо</a></Button>
+            <Button><a style={{color: '#fff'}} href="tel:+77477084946">Бізбен байланысыңыз</a></Button>
+            <Button white><a href="mailto:sioma.aslan@gmail.com">Хат жіберу</a></Button>
           </DialogActions>
         </Dialog>
     </>

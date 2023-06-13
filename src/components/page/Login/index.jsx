@@ -73,44 +73,42 @@ export default function Login({setIsAuth}) {
     <img src={loginImage} alt="loginImage" />
       <div className={styles.main}>
           <h3>
-            <span onClick={()=>!login && setLogin(true)} className={!login && styles.active}>Log In</span> 
-            <span className={styles.or}> or </span> 
-            <span onClick={()=>login && setLogin(false)} className={login && styles.active}>Sign In</span>
+            <span onClick={()=>!login && setLogin(true)} className={!login && styles.active}>Кіру</span> 
+            <span className={styles.or}> немесе </span> 
+            <span onClick={()=>login && setLogin(false)} className={login && styles.active}>Тіркелу</span>
           </h3>
 
           {
             login ? 
             <form id="testid" onSubmit={(e)=>handleSubmitLogin(e)}>
               <div className={styles.input__group}>
-                <label>E-MAIL</label>
-                <input name='email' type="email" placeholder='Enter your email addres' />
+                <label>Электрондық пошта</label>
+                <input name='email' type="email" placeholder='Электрондық поштаңызды енгізіңіз' />
               </div>
               <div className={styles.input__group}>
-                <label>PASSWORD</label>
+                <label>Құпия сөз</label>
                 <input name='password' type="password" placeholder='**********' />
               </div>
               <div className={styles.button__group}>
-                <Button style={{minWidth: '50%'}}>Log In</Button>
-                <span className={styles.fogot}>Forgot your password?</span>
+                <Button style={{minWidth: '50%'}}>Кіру</Button>
               </div>
             </form>
             : 
             <form onSubmit={(e)=>handleSubmitReg(e)}>
             <div className={styles.input__group}>
-              <label>E-MAIL</label>
-              <input name='email' type="email" placeholder='Enter your email addres' />
+              <label>Электрондық пошта</label>
+              <input name='email' type="email" placeholder='Электрондық поштаңызды енгізіңіз' />
             </div>
             <div className={styles.input__group}>
-              <label>PASSWORD</label>
+              <label>Құпия сөз</label>
               <input name='password' type="password" placeholder='**********' />
             </div>
             <div className={styles.input__group}>
-              <label>FULL NAME</label>
-              <input name='full_name' type="text" placeholder='Enter your full name' />
+              <label>Тегі / Аты</label>
+              <input name='full_name' type="text" placeholder='Толық аты-жөніңізді енгізіңіз' />
             </div>
             <div className={styles.button__group}>
-              <Button style={{minWidth: '50%'}}>Sign In</Button>
-              <span className={styles.fogot}>Forgot your password?</span>
+              <Button style={{minWidth: '50%'}}>Тіркелу</Button>
             </div>
           </form>
           }

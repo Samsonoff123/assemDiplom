@@ -29,7 +29,7 @@ h3 {
 .or {
     font-style: normal;
     font-weight: 400;
-    font-size: 28px;
+    font-size: 14px;
     line-height: 35px;
     color: #BDBDBD;
 }
@@ -100,9 +100,11 @@ form {
 .bottom .icons {
     display: flex;
     gap: 10px;
+    opacity: 0;
 }
 
 .bottom span {
+    opacity: 0;
     font-weight: 700;
     font-size: 14px;
     line-height: 18px;

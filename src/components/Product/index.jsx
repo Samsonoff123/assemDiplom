@@ -9,7 +9,7 @@ export default function Product({product}) {
     <div className='product__element' key={product.id}>
         <Link to={`/product/${product.id}`}>
         <div className='product__info'>
-            <h3>Урок {product.id}</h3>
+            <h3>{product.id} - сабақ</h3>
             <div className="product__title">{product.name}</div>
             <div className="product__description">{product.description}</div>
         </div>

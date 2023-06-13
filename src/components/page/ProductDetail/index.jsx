@@ -80,8 +80,8 @@ function Result({correct, questions}) {
   return (
     <div className="result">
       <img src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png" />
-      <h2>Вы отгадали {correct} ответа из {questions.length}</h2>
-      <button onClick={()=>document.location.reload()}>Попробовать снова</button>
+      <h2>Сіз {questions.length} сұрақтың {correct} жауабын таптыңыз</h2>
+      <button onClick={()=>document.location.reload()}>Қайтадан</button>
     </div>
   );
 }
@@ -112,7 +112,7 @@ function ProductDetail({ isAdmin }) {
 
   return course ? (
     <>
-      <Header isAdmin={isAdmin} pageName={'Урок ' + id} />
+      <Header isAdmin={isAdmin} pageName={id + ' - сабақ'} />
       <ProductCart {...course} />
     </>
   ) : (
